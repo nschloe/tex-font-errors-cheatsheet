@@ -8,7 +8,7 @@ PDFLATEX:=pdflatex
 # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
 # TARGET:=latex-font-plot
-TARGET:=errors-cheatsheet
+TARGET:=tex-font-cheatsheet
 
 # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 # 
