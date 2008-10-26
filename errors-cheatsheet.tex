@@ -1,5 +1,7 @@
 \documentclass[10pt]{scrartcl}
 
+\usepackage{amsmath}
+
 % \usepackage{auto1}
 % \usepackage[T1]{fontenc}
 % \usepackage{MinionPro}
@@ -28,6 +30,20 @@
 \newcommand{\ttffile}{\texttt{\$TTF\_FILE}}
 \newcommand{\encfile}{\texttt{\$ENC\_FILE}}
 
+\newcommand{\sampleshort}{
+\begin{tabular}{p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}}
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 9 &\\
+a & b & c & d & e & f & g & h & i & j & k & l & m\\
+n & o & p & q & r & s & t & u & v & w & x & y & z\\
+A & B & C & D & E & F & G & H & I & J & K & L & M\\
+N & O & P & Q & R & S & T & U & V & W & X & Y & Z
+\end{tabular}%
+% {0}{1}{2}{3}{4}{5}{6}{7}{8}{9}\\
+% {a}{b}{c}{d}{e}{f}{g}{h}{i}{j}{k}{l}{m}{n}{o}{p}{q}{r}{s}{t}{u}{v}{w}{x}{y}{z}\\
+% {A}{B}{C}{D}{E}{F}{G}{H}{I}{J}{K}{L}{M}{N}{O}{P}{Q}{R}{S}{T}\\
+% {U}{V}{W}{X}{Y}{Z}
+}
+
 \newcommand{\sample}{
 \begin{tabular}{p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}@{}p{2.5ex}}
 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 9 &   &\\
@@ -43,7 +59,7 @@ O & P & Q & R & S & T & U & V & W & X & Y & Z
 }
 
 \begin{document}
-% \svnInfo $Id$ 
+\svnInfo $Id$ 
 
 \centering
 
@@ -74,33 +90,33 @@ output/.style   = {draw=yellow, thick, fill=yellow!20, text width=5cm,minimum he
 % &
 % \node [block] (sty_latex) {\LaTeX +sty};&
 \node [block] (declare_latex) {\LaTeX};&
-\node [block] (tex) {{\TeX}**}; \\
+\node [block] (tex) {{\TeX}${}^{\text 2}$}; \\
 % row 1
 % \node [error_number] (no_sty) {1};&
 % \node [decision] (sty_exist) {STY file found?};&
 
-\node [decision] (fd_exist) {Font declared?*}; &
-\node [decision] (tfm_exist) {TFM file*** found?};&
-\node [error_number] (no_tfm) {3};\\
+\node [decision] (fd_exist) {Font declared?${}^{\text 1}$}; &
+\node [decision] (tfm_exist) {TFM file${}^{\text 3}$ found?};&
+\node [error_number] (no_tfm) {2};\\
 % row 3
 &
-\node [decision] (vf_exist) {VF file*** found?}; &
-\node [decision] (rtfm_exist) {Raw TFM file*** found?};\\
+\node [decision] (vf_exist) {VF file${}^{\text 3}$ found?}; &
+\node [decision] (rtfm_exist) {Raw TFM file${}^{\text 3}$~found?};\\
 % row 4
 &
 \node [decision] (fi_suff) {Font info sufficient?};&\\
 % row 4b
 &
 \node [decision] (map_exist) {Map file in \TeX's cache?};
-&\node [error_number] (no_map) {5};\\
+&\node [error_number] (no_map) {4};\\
 % row 5
 &
 \node [decision] (enc_exist) {ENC file found?};&
-\node [error_number] (no_encoding) {6};\\
+\node [error_number] (no_encoding) {5};\\
 % row 6
 &
 \node [decision] (ttf_exist) {PFM/TTF file found?};&
-\node [error_number] (no_ttf) {7};\\
+\node [error_number] (no_ttf) {6};\\
 };
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % *** END matrix
@@ -109,14 +125,14 @@ output/.style   = {draw=yellow, thick, fill=yellow!20, text width=5cm,minimum he
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % *** output nodes
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-\node (fallback_output) at (-10,7) [output] {\fontfamily{cmr}\fontseries{m}\fontshape{n}\selectfont An output file with a fallback font (mostly \texttt{cmr}) will be generated .\\\sample\\ };
+\node (fallback_output) at (-10,7) [output] {\fontfamily{cmr}\fontseries{m}\fontshape{n}\selectfont An output file with a fallback font (usually \texttt{cmr}) will be generated .\\\sampleshort\\ };
 \node (output_flawless)at(-7,-12) [output,text width=7cm]   {\fontfamily{MinionPro-TOsF}\fontseries{m}\fontshape{n}\selectfont Done!\\
-\sample\\
-Depending on whether or not your TFM/VF file contains kerning and ligature tables, the quality of your document might vary (see note~****). Compare
+\sampleshort\\
+Depending on whether or not your TFM/VF file contains kerning and ligature tables, the quality of your document might vary (see note~${}^4$). Compare, for example,
 \begin{center}
 \begin{tabular}{cc}
 \toprule
-good  & bad\\\midrule
+% good  & bad\\\midrule
 Table & {T}able\\
 ffi   & {f}{f}i\\
 ---   & {-}{-}{-}\\
@@ -140,16 +156,16 @@ ffi   & {f}{f}i\\
 \path (declare_latex) -- (fd_exist);
 % \path (fd_exist) -- node [midway] {no} (no_fd);
 \path (fd_exist) -- node [near start] {no}
-                    node [above,near end] {\tikz\node [warning_number] (no_fd) {2};} (fallback_output);
+                    node [above,near end] {\tikz\node [warning_number] (no_fd) {1};} (fallback_output);
 \path (fd_exist) -- node [near start] {yes} (tfm_exist);
 \path (tfm_exist) -- node [near start] {no} (no_tfm);
 \path (tfm_exist) -- node [near start] {yes} (vf_exist);
-\path (vf_exist) -- node [near start] {no****} (fi_suff);
+\path (vf_exist) -- node [near start] {no${}^{\text 4}$} (fi_suff);
 \path (map_exist) -- node [near start] {yes} (enc_exist);
 \path (enc_exist) -- node [near start] {yes} (ttf_exist);
 \path (ttf_exist) -- node [near start] {yes} (output_flawless);
 \path (vf_exist) -- node [near start] {yes} (rtfm_exist);
-\path [double,-] (rtfm_exist) -- node [near start,above] {\tikz\node [error_number] (no_fd) {4};} (tfm_exist);
+\path [double,-] (rtfm_exist) -- node [near start,above] {\tikz\node [error_number] (no_fd) {3};} (tfm_exist);
 \path (rtfm_exist) -- node [near start] {yes} (fi_suff);
 \path (fi_suff)    -- node [near start] {yes} (map_exist);
 \path (fi_suff)    -- node [near start] {no} (no_map);
@@ -175,10 +191,10 @@ ffi   & {f}{f}i\\
 Notes
 \end{center}
 \begin{tabularx}{\textwidth}{lX}
-* & To use a font in {\LaTeX}, you need to connect \LaTeX's font definition -- given as \texttt{fontfamily} (e.g., Computer Modern Roman, \texttt{cmr}), \texttt{fontseries} (e.g., bold, \texttt{b}), and \texttt{fontsshape} (e.g, upright, \texttt{n}) -- with an actual {\TeX} font. This happens most commonly in an FD file, but can also be accomplished in the {\LaTeX} source file itself.\\[2mm]
-** & Even if you're not fluent in \TeX, it's quite easy to actually use a font in it, and that's what you should actually do if things are not working as expected in \LaTeX. On the command line, just go \texttt{pdftex testfont}, then give your font's (\TeX) name, ask {\TeX} to \texttt{$\backslash$sample}, and say \texttt{$\backslash$bye}. What you'll get is a nice prototype document of your font.\\[2mm]
-***  & Your font definition declares a {\TeX} font name, and {\TeX} looks for \texttt{TeX-font-name.\{tfm,vf\}}.\\[2mm]
-**** & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, \texttt{{-}{-}{-}} and \texttt{Ta} will be rendered as ``{-}{-}{-}'' and ``{T}{a}'' instead of the correct ``---'' and ``Ta''.
+${}^{\text 1}$ & To use a font in {\LaTeX}, you need to connect \LaTeX's font definition -- given as \texttt{fontfamily} (e.g., Computer Modern Roman, \texttt{cmr}), \texttt{fontseries} (e.g., bold, \texttt{b}), and \texttt{fontsshape} (e.g, upright, \texttt{n}) -- with an actual {\TeX} font. This happens most commonly in an FD file, but can also be accomplished in the {\LaTeX} source file itself.\\[2mm]
+${}^{\text 2}$ & Even if you're not fluent in \TeX, it's quite easy to actually use a font in it, and that's what you should actually do if things are not working as expected in \LaTeX. On the command line, just go \texttt{pdftex~testfont}, then give your font's (\TeX) name, ask {\TeX} to \texttt{$\backslash$sample}, and say \texttt{$\backslash$bye}. What you'll get is a nice prototype document of your font.\\[2mm]
+${}^{\text 3}$  & Your font definition declares a {\TeX} font name and {\TeX} looks for \texttt{TeX-font-name.\{tfm,vf\}}.\\[2mm]
+${}^{\text 4}$ & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, ``\texttt{{-}{-}{-}}'' and ``\texttt{Ta}'' will be rendered as ``{-}{-}{-}'' and ``{T}{a}'' instead of the correct ``---'' and ``Ta''.
 \end{tabularx}
 \end{minipage}};
 \end{scope}
@@ -229,7 +245,7 @@ warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,sta
 % \end{Verbatim}
 % \end{minipage}};\\
 % % 
-\node [warning_number] {2};&
+\node [warning_number] {1};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 LaTeX Font Warning: Font shape `OT1/jcs/m/n' undefined
@@ -256,7 +272,7 @@ that is, T1 encoding? Well, \LaTeX's default is OT1, so it's probably just enoug
 \end{minipage}};\\
 %
 % 3:
-\node [error_number] {3};&
+\node [error_number] {2};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 kpathsea: Running mktextfm jcsr8t
@@ -286,11 +302,11 @@ kpathsea: Appending font creation commands to missfont.log.
 \end{minipage}};\\
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
-Now, somewhere in \TeX's data (in an FD file corresponding to your font or in the source file), one of \TeX's internal font names is specified, like \texttt{jcsr8t} in (\ref{}) above. Unfortunately, {\TeX} can't find any file named \texttt{jcsr8t.tfm} now; you can verify this with
+Now, somewhere in \TeX's data (in an FD file corresponding to your font or in the source file), one of \TeX's internal font names is specified, (like \texttt{jcsr8t} here). Unfortunately, {\TeX} can't find a file named \texttt{jcsr8t.tfm} now; you can verify this with
 \begin{Verbatim}
 $> kspewhich jcsr8t.tfm
 \end{Verbatim}
-which doesn't give any location. If you are sure that the file is there, update \TeX's cache. 
+which doesn't give any location. \emph{This file is needed to use the font.} If you are sure that the file is there, update \TeX's cache.
 \end{minipage}};\\
 };
 \end{tikzpicture}
@@ -306,7 +322,7 @@ warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,sta
 {
 %
 % 4:
-\node [error_number] {4};&
+\node [error_number] {3};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 ! TeX capacity exceeded, sorry [max level recursion of virtual fonts=10].
@@ -314,13 +330,13 @@ warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,sta
 \end{minipage}};\\
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
-This error message arises when there is a TFM file and a VF file, which points to a raw TFM file that happens to be the original TFM file itself. From there, {\TeX} finds the corresponding VF file again: happy looping until {\TeX} is tired.
+This error message arises when there is a TFM file and a VF file that points to a raw TFM file that happens to be the original TFM file itself. From there, {\TeX} finds the corresponding VF file again and so on: happy looping until {\TeX} is tired.
 
 There probably was an error when creating the font files which resulted in not distinguishing raw TFM and TFM file. If you created the font files yourself, make sure that \emph{these are actually different files}.
 \end{minipage}};\\
 %
 % 5:
-\node [error_number] {5};&
+\node [error_number] {4};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 kpathsea: Running mktexpk --mfmode / --bdpi 600 --mag 0+420/600 --dpi 420 rjcsr8t
@@ -335,7 +351,7 @@ kpathsea: Appending font creation commands to missfont.log.
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
 Probably the most common error message in {\LaTeX} fonts.
 
-It's being triggered when the information in the (raw) TFM file is not sufficient to create the actual font, and thus is a font installation error.
+It's being triggered when the information in the (raw) TFM file is not sufficient to create the actual font, and thus again is a font installation error.
 \begin{itemize}
 \item Check that you did not interchange raw TFM and TFM font file (the raw TFM file should be a lot smaller).
 \item Check that {\TeX} finds your VF file if there is one.
@@ -345,6 +361,10 @@ Another possible cause is that the raw TFM is declared in no MAP file, or that \
 \begin{Verbatim}
 rjcsr8t Comic-Sans " T1Encoding ReEncodeFont " <Comic-Sans.ttf <T1-WGL4.enc
 \end{Verbatim}
+In Linux, this could for example be done by
+\begin{Verbatim}
+$> find /path/to/mapfiles | xargs grep rjcsr8t
+\end{Verbatim}
 If you can't find it, create a proper map file, and update \TeX's map cache:
 \begin{Verbatim}
 $> updmap --enable Map=/path/to/mapfile.map
@@ -352,7 +372,7 @@ $> updmap --enable Map=/path/to/mapfile.map
 \end{minipage}};\\
 %
 % 6:
-\node [error_number] {6};&
+\node [error_number] {5};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 !pdfTeX error: pdflatex (file T1-WGL4.enc): cannot open encoding file for reading
@@ -368,7 +388,7 @@ $> texhash
 \end{minipage}};\\
 %
 % 7:
-\node [error_number] {7};&
+\node [error_number] {6};&
 \node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
 \begin{Verbatim}
 !pdfTeX error: pdflatex (file Comic-Sans.ttf): cannot open TrueType font file
