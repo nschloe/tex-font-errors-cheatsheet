@@ -19,6 +19,18 @@
 
 \usepackage[margin=0.5in]{geometry}
 
+\usepackage{listings}  % include highlighted source code
+\lstset{% general command to set parameter(s)
+basicstyle=\ttfamily, % print whole listing small
+keywordstyle=\color{myDarkBlue},
+identifierstyle=,
+commentstyle=\color{myDarkGreen},
+stringstyle=\color{myAccentRed},
+showstringspaces=false,     % no special string spaces
+frame=single,
+language=[LaTeX]Tex
+}
+
 \usepackage{tabularx}
 \usepackage{booktabs}
 
@@ -269,29 +281,30 @@ warning_number/.style  = {starburst, fill=myAccentYellow, draw=myAccentRed, line
 % \end{minipage}};\\
 % % 
 \node [warning_number] {1};&
-\node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}
+\node [errormsg] {\begin{minipage}[t]{\errormsgboxwidth}%
 \begin{Verbatim}
 LaTeX Font Warning: Font shape `OT1/jcs/m/n' undefined
 (Font)              using `OT1/jcs/m/n' instead on input line 23.
 \end{Verbatim}
-\end{minipage}};\\
+\end{minipage}
+};\\
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
 If you select the font explicitly by
-\begin{Verbatim}
-  \fontfamily{jcs}\fontseries{m}\fontshape{n}\selectfont My sample text.
-\end{Verbatim}
+\begin{lstlisting}
+\fontfamily{jcs}\fontseries{m}\fontshape{n}\selectfont Sample text.
+\end{lstlisting}
 you might run into the same issue. The problem is that {\LaTeX} can't find a definition (in an FD file or in the source file itself) that links the font family \texttt{jcs} with series \texttt{m} and shape \texttt{n} \emph{and the current encoding} to a specific internal {\TeX} font.
 
 That said, the problem is mostly the encoding. Are you using
-\begin{Verbatim}
-  \DeclareFontFamily{T1}{jcs}{}
-  \DeclareFontShape{T1}{jcs}{m}{n} {<-> jcsr8t } {}
-\end{Verbatim}
+\begin{lstlisting}[language=TeX]
+\DeclareFontFamily{T1}{jcs}{}
+\DeclareFontShape{T1}{jcs}{m}{n} {<-> jcsr8t } {}
+\end{lstlisting}
 that is, T1 encoding? Well, \LaTeX's default is OT1, so it's probably just enough to force T1 encoding in your source file with
-\begin{Verbatim}
-  \usepackage[T1]{fontenc}
-\end{Verbatim}
+\begin{lstlisting}
+\usepackage[T1]{fontenc}
+\end{lstlisting}
 \end{minipage}};\\
 %
 % 3:
@@ -326,9 +339,9 @@ kpathsea: Appending font creation commands to missfont.log.
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
 Now, somewhere in \TeX's data (in an FD file corresponding to your font or in the source file), one of \TeX's internal font names is specified, (like \texttt{jcsr8t} here). Unfortunately, {\TeX} can't find a file named \texttt{jcsr8t.tfm} now; you can verify this with
-\begin{Verbatim}
+\begin{lstlisting}[language=bash]
 $> kspewhich jcsr8t.tfm
-\end{Verbatim}
+\end{lstlisting}
 which doesn't give any location. \emph{This file is needed to use the font.} If you are sure that the file is there, update \TeX's cache.
 \end{minipage}};\\
 };
@@ -350,9 +363,9 @@ warning_number/.style  = {starburst, fill=myAccentYellow, draw=myAccentRed, line
 \begin{Verbatim}
 ! TeX capacity exceeded, sorry [max level recursion of virtual fonts=10].
 \end{Verbatim}
-\end{minipage}};\\
-&
-\node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
+\end{minipage}};\\%
+&%
+\node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}%
 This error message arises when there is a TFM file and a VF file that points to a raw TFM file that happens to be the original TFM file itself. From there, {\TeX} finds the corresponding VF file again and so on: happy looping until {\TeX} is tired.
 
 There probably was an error when creating the font files which resulted in not distinguishing raw TFM and TFM file. If you created the font files yourself, make sure that \emph{these are actually different files}.
@@ -381,17 +394,17 @@ It's being triggered when the information in the (raw) TFM file is not sufficien
 \end{itemize}
 
 Another possible cause is that the raw TFM is declared in no MAP file, or that \TeX's map cache isn't updated. Look for a map file with an entry starting with the raw TFM name, for example,
-\begin{Verbatim}
+\begin{lstlisting}[breaklines,breakatwhitespace]
 rjcsr8t Comic-Sans " T1Encoding ReEncodeFont " <Comic-Sans.ttf <T1-WGL4.enc
-\end{Verbatim}
+\end{lstlisting}
 In Linux, this could for example be done by
-\begin{Verbatim}
+\begin{lstlisting}[language=bash]
 $> find /path/to/mapfiles | xargs grep rjcsr8t
-\end{Verbatim}
+\end{lstlisting}
 If you can't find it, create a proper map file, and update \TeX's map cache:
-\begin{Verbatim}
+\begin{lstlisting}[language=bash]
 $> updmap --enable Map=/path/to/mapfile.map
-\end{Verbatim}
+\end{lstlisting}
 \end{minipage}};\\
 %
 % 6:
@@ -405,9 +418,9 @@ $> updmap --enable Map=/path/to/mapfile.map
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
 Probably easy: {\LaTeX} can't find the encoding file. Can you? In this case, you probably forgot to update \TeX's cache:
-\begin{Verbatim}
+\begin{lstlisting}[language=bash]
 $> texhash
-\end{Verbatim}
+\end{lstlisting}
 \end{minipage}};\\
 %
 % 7:
