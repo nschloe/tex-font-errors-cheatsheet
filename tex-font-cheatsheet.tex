@@ -1,16 +1,21 @@
 \documentclass[10pt]{scrartcl}
 
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage{csquotes}
+
 \usepackage{amsmath}
 
 % \usepackage{auto1}
-% \usepackage[T1]{fontenc}
 % \usepackage{MinionPro}
 % \usepackage{MyriadPro}
 \renewcommand{\familydefault}{\sfdefault}
 
 % \usepackage{beramono}
 
-\usepackage[eso-foot]{svninfo}
+% \usepackage[eso-foot]{svninfo}
 
 \usepackage[margin=0.5in]{geometry}
 
@@ -25,6 +30,15 @@
 \usepackage{fancyvrb}
 
 \pagestyle{empty}
+
+% define colors from the KDE color scheme
+\usepackage{xcolor}
+% \definecolor{myDarkBlue}{RGB}{}
+% \definecolor{myLightBlue}{RGB}{}
+% \definecolor{myDarkGreen}{RGB}{}
+% \definecolor{myLightGreen}{RGB}{}
+% \definecolor{myAccentYellow}{RGB}{}
+\definecolor{myAccentRed}{RGB}{231,35,0}
 
 
 \newcommand{\ttffile}{\texttt{\$TTF\_FILE}}
@@ -59,7 +73,7 @@ O & P & Q & R & S & T & U & V & W & X & Y & Z
 }
 
 \begin{document}
-\svnInfo $Id$ 
+% \svnInfo $Id$ 
 
 \centering
 
@@ -73,13 +87,13 @@ O & P & Q & R & S & T & U & V & W & X & Y & Z
 decision/.style = {diamond, draw=blue, thick, fill=blue!20, text width=4.5em, text badly centered,inner sep=1pt},
 block/.style    = {rectangle, draw=blue, thick, fill=blue!20, text width=5em, text centered, rounded corners, minimum height=4em},
 line/.style     = {draw, thick, -latex',shorten >=2pt},
-error/.style    = {draw=red, thick, fill=red!20, minimum height=2em},
-error_number/.style  = {starburst, fill=yellow, draw=red, line width=2pt,starburst points=17},
-warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,starburst points=7},
+error/.style    = {draw=myAccentRed, thick, fill=red!20, minimum height=2em},
+error_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=2pt,starburst points=17},
+warning_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=0.5pt,starburst points=7},
 output/.style   = {draw=yellow, thick, fill=yellow!20, text width=5cm,minimum height=2em, inner sep=2ex}
 ]
 
-% \node[starburst, fill=yellow, draw=red, line width=2pt] {\bf BANG!};
+% \node[starburst, fill=yellow, draw=myAccentRed, line width=2pt] {\bf BANG!};
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 % *** matrix
@@ -193,8 +207,8 @@ Notes
 \begin{tabularx}{\textwidth}{lX}
 ${}^{\text 1}$ & To use a font in {\LaTeX}, you need to connect \LaTeX's font definition -- given as \texttt{fontfamily} (e.g., Computer Modern Roman, \texttt{cmr}), \texttt{fontseries} (e.g., bold, \texttt{b}), and \texttt{fontsshape} (e.g, upright, \texttt{n}) -- with an actual {\TeX} font. This happens most commonly in an FD file, but can also be accomplished in the {\LaTeX} source file itself.\\[2mm]
 ${}^{\text 2}$ & Even if you're not fluent in \TeX, it's quite easy to actually use a font in it, and that's what you should actually do if things are not working as expected in \LaTeX. On the command line, just go \texttt{pdftex~testfont}, then give your font's (\TeX) name, ask {\TeX} to \texttt{$\backslash$sample}, and say \texttt{$\backslash$bye}. What you'll get is a nice prototype document of your font.\\[2mm]
-${}^{\text 3}$  & Your font definition declares a {\TeX} font name and {\TeX} looks for \texttt{TeX-font-name.\{tfm,vf\}}.\\[2mm]
-${}^{\text 4}$ & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, ``\texttt{{-}{-}{-}}'' and ``\texttt{Ta}'' will be rendered as ``{-}{-}{-}'' and ``{T}{a}'' instead of the correct ``---'' and ``Ta''.
+${}^{\text 3}$  & Your font definition declares a {\TeX} font name and {\TeX} looks for \texttt{[r]TeX-font-name.\{tfm,vf\}}.\\[2mm]
+${}^{\text 4}$ & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, \enquote{\texttt{{-}{-}{-}}} and \enquote{\texttt{Ta}} will be rendered as \enquote{{-}{-}{-}} and \enquote{{T}{a}} instead of the correct \enquote{---} and \enquote{Ta}.
 \end{tabularx}
 \end{minipage}};
 \end{scope}
@@ -223,10 +237,10 @@ The following error messages were generated with the TTF font Comic Sans in {\La
 \setlength{\errormsgboxwidth}{15cm}
 
 \begin{tikzpicture}[%
-error_number/.style  = {starburst, fill=yellow, draw=red, line width=2pt,starburst points=17},%
+error_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=2pt,starburst points=17},%
 errormsg/.style      = {rectangle, draw=black, thick, rounded corners, inner sep=2ex},%
 remedy/.style        = {},%
-warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,starburst points=7}%
+warning_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=0.5pt,starburst points=7}%
 ]
 \matrix [column sep=5mm,row sep=7mm]
 {
@@ -313,10 +327,10 @@ which doesn't give any location. \emph{This file is needed to use the font.} If 
 
 
 \begin{tikzpicture}[%
-error_number/.style  = {starburst, fill=yellow, draw=red, line width=2pt,starburst points=17},%
+error_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=2pt,starburst points=17},%
 errormsg/.style      = {rectangle, draw=black, thick, rounded corners, inner sep=2ex},%
 remedy/.style        = {},%
-warning_number/.style  = {starburst, fill=yellow, draw=red, line width=0.5pt,starburst points=7}%
+warning_number/.style  = {starburst, fill=yellow, draw=myAccentRed, line width=0.5pt,starburst points=7}%
 ]
 \matrix [column sep=5mm,row sep=7mm]
 {
