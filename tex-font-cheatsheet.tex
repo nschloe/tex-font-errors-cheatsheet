@@ -340,7 +340,7 @@ kpathsea: Appending font creation commands to missfont.log.
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
 Now, somewhere in \TeX's data (in an FD file corresponding to your font or in the source file), one of \TeX's internal font names is specified, (like \texttt{jcsr8t} here). Unfortunately, {\TeX} can't find a file named \texttt{jcsr8t.tfm} now; you can verify this with
 \begin{lstlisting}[language=bash]
-$> kspewhich jcsr8t.tfm
+$> kpsewhich jcsr8t.tfm
 \end{lstlisting}
 which doesn't give any location. \emph{This file is needed to use the font.} If you are sure that the file is there, update \TeX's cache.
 \end{minipage}};\\
