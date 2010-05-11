@@ -1,0 +1,12 @@
+(La)TeX font errors cheat sheet
+===============================
+
+Ever bumped into cryptic error messages when installing a font in (La)TeX?
+Then this cheat sheet is for you.
+
+It outlines (La)TeX's way of incorporating the font along the compilation
+process, highlights what can go wrong along the process, and how (La)TeX
+will complain about it. Some suggestions are made to remedy the situation
+as well.
+
+Copyright (C) 2009, 2010 Nico Schlömer
