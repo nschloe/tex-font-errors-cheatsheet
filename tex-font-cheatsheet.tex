@@ -16,10 +16,11 @@
 % This work consists of the file tex-font-cheatsheet.tex.
 \documentclass[10pt]{scrartcl}
 
-\usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage[T1]{fontenc}
 \usepackage{microtype}
 
+\usepackage{fixltx2e}
 \usepackage{csquotes}
 
 \usepackage{amsmath}
@@ -114,9 +115,9 @@ O & P & Q & R & S & T & U & V & W & X & Y & Z
 \centering
 
 % ============================================================================
-% END 1st page
+% START page 1
 % ============================================================================
-\section*{{\TeX} font errors: Cheatsheet}
+\section*{\TeX{} font errors: Cheatsheet}
 
 \begin{tikzpicture}
 [auto,
@@ -141,18 +142,18 @@ output/.style   = {draw=myDarkGreen, thick, fill=myLightYellow, text width=5cm,m
 % &
 % \node [block] (sty_latex) {\LaTeX +sty};&
 \node [block] (declare_latex) {\LaTeX};&
-\node [block] (tex) {{\TeX}${}^{\text 2}$}; \\
+\node [block] (tex) {\TeX{}\textsuperscript{2}}; \\
 % row 1
 % \node [error_number] (no_sty) {1};&
 % \node [decision] (sty_exist) {STY file found?};&
 
-\node [decision] (fd_exist) {Font declared?${}^{\text 1}$}; &
-\node [decision] (tfm_exist) {TFM file${}^{\text 3}$ found?};&
+\node [decision] (fd_exist) {Font declared?\textsuperscript{1}}; &
+\node [decision] (tfm_exist) {TFM file\textsuperscript{3} found?};&
 \node [error_number] (no_tfm) {2};\\
 % row 3
 &
-\node [decision] (vf_exist) {VF file${}^{\text 3}$ found?}; &
-\node [decision] (rtfm_exist) {Raw TFM file${}^{\text 3}$~found?};\\
+\node [decision] (vf_exist) {VF file\textsuperscript{3} found?}; &
+\node [decision] (rtfm_exist) {Raw TFM file\textsuperscript{3}~found?};\\
 % row 4
 &
 \node [decision] (fi_suff) {Font info sufficient?};&\\
@@ -211,7 +212,7 @@ ffi   & {f}{f}i\\
 \path (fd_exist) -- node [near start] {yes} (tfm_exist);
 \path (tfm_exist) -- node [near start] {no} (no_tfm);
 \path (tfm_exist) -- node [near start] {yes} (vf_exist);
-\path (vf_exist) -- node [near start] {no${}^{\text 4}$} (fi_suff);
+\path (vf_exist) -- node [near start] {no\textsuperscript{4}} (fi_suff);
 \path (map_exist) -- node [near start] {yes} (enc_exist);
 \path (enc_exist) -- node [near start] {yes} (ttf_exist);
 \path (ttf_exist) -- node [near start] {yes} (output_flawless);
@@ -242,10 +243,10 @@ ffi   & {f}{f}i\\
 Notes
 \end{center}
 \begin{tabularx}{\textwidth}{lX}
-${}^{\text 1}$ & To use a font in {\LaTeX}, you need to connect \LaTeX's font definition -- given as \texttt{fontfamily} (e.g., Computer Modern Roman, \texttt{cmr}), \texttt{fontseries} (e.g., bold, \texttt{b}), and \texttt{fontsshape} (e.g, upright, \texttt{n}) -- with an actual {\TeX} font. This happens most commonly in an FD file, but can also be accomplished in the {\LaTeX} source file itself.\\[2mm]
-${}^{\text 2}$ & Even if you're not fluent in \TeX, it's quite easy to actually use a font in it, and that's what you should actually do if things are not working as expected in \LaTeX. On the command line, just go \texttt{pdftex~testfont}, then give your font's (\TeX) name, ask {\TeX} to \texttt{$\backslash$sample}, and say \texttt{$\backslash$bye}. What you'll get is a nice prototype document of your font.\\[2mm]
-${}^{\text 3}$  & Your font definition declares a {\TeX} font name and {\TeX} looks for \texttt{[r]TeX-font-name.\{tfm,vf\}}.\\[2mm]
-${}^{\text 4}$ & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, \enquote{\texttt{{-}{-}{-}}} and \enquote{\texttt{Ta}} will be rendered as \enquote{{-}{-}{-}} and \enquote{{T}{a}} instead of the correct \enquote{---} and \enquote{Ta}.
+\textsuperscript{1} & To use a font in {\LaTeX}, you need to connect \LaTeX's font definition -- given as \texttt{fontfamily} (e.g., Computer Modern Roman, \texttt{cmr}), \texttt{fontseries} (e.g., bold, \texttt{b}), and \texttt{fontsshape} (e.g, upright, \texttt{n}) -- with an actual {\TeX} font. This happens most commonly in an FD file, but can also be accomplished in the {\LaTeX} source file itself.\\[2mm]
+\textsuperscript{2} & Even if you're not fluent in \TeX, it's quite easy to actually test a font with it, and that's what you should do if things are not working as expected in \LaTeX. On the command line, just go \texttt{pdftex~testfont}, then give your font's (\TeX) name, ask {\TeX} to \texttt{$\backslash$sample}, and say \texttt{$\backslash$bye}. What you'll get is a nice prototype document of your font.\\[2mm]
+\textsuperscript{3} & Your font definition declares a \TeX{} font name and \TeX{} looks for \texttt{[r]TeX-font-name.\{tfm,vf\}}.\\[2mm]
+\textsuperscript{4} & If no further errors occur, your document will probably compile fine without a font-related warning message at all. However, you appear to use the raw TFM directly without the VF detour. This way, {\TeX} will not have access to kerning and ligature information; hence, for example, \enquote{\texttt{{-}{-}{-}}} and \enquote{\texttt{Ta}} will be rendered as \enquote{{-}{-}{-}} and \enquote{{T}{a}} instead of the correct \enquote{---} and \enquote{Ta}.
 \end{tabularx}
 \end{minipage}};
 \end{scope}
@@ -255,17 +256,17 @@ ${}^{\text 4}$ & If no further errors occur, your document will probably compile
 
 \end{tikzpicture}
 % ============================================================================
-% END 1st page
+% END page 1
 % ============================================================================
 
 
 % ============================================================================
-% 2nd page
+% page 2
 % ============================================================================
-\section*{Errors and warnings as given by {\TeX}}
+\section*{Errors and warnings as given by \TeX}
 
 \begin{minipage}{\textwidth}
-The following error messages were generated with the TTF font Comic Sans in {\LaTeX}. The {\TeX} font name was chosen to be \texttt{jcs} and T1 encoding was used.
+The following error messages were generated with the TTF font Comic Sans in \LaTeX{}. The \TeX{} font name was chosen to be \texttt{jcs} and T1 encoding was used.
 \end{minipage}
 
 \bigskip
@@ -310,7 +311,7 @@ If you select the font explicitly by
 \begin{lstlisting}
 \fontfamily{jcs}\fontseries{m}\fontshape{n}\selectfont Sample text.
 \end{lstlisting}
-you might run into the same issue. The problem is that {\LaTeX} can't find a definition (in an FD file or in the source file itself) that links the font family \texttt{jcs} with series \texttt{m} and shape \texttt{n} \emph{and the current encoding} to a specific internal {\TeX} font.
+you might run into the same issue. The problem is that \LaTeX{} can't find a definition (in an FD file or in the source file itself) that links the font family \texttt{jcs} with series \texttt{m} and shape \texttt{n} \emph{and the current encoding} to a specific internal \TeX{} font.
 
 That said, the problem is mostly the encoding. Are you using
 \begin{lstlisting}[language=TeX]
@@ -358,7 +359,7 @@ Now, somewhere in \TeX's data (in an FD file corresponding to your font or in th
 \begin{lstlisting}[language=bash]
 $> kpsewhich jcsr8t.tfm
 \end{lstlisting}
-which doesn't give any location. \emph{This file is needed to use the font.} If you are sure that the file is there, update \TeX's cache.
+which doesn't give any location. \emph{This file is needed to use the font.} If you are sure that the file is there, update \TeX's cache (\texttt{texhash}).
 \end{minipage}};\\
 };
 \end{tikzpicture}
@@ -382,7 +383,7 @@ warning_number/.style  = {starburst, fill=myAccentYellow, draw=myAccentRed, line
 \end{minipage}};\\%
 &%
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}%
-This error message arises when there is a TFM file and a VF file that points to a raw TFM file that happens to be the original TFM file itself. From there, {\TeX} finds the corresponding VF file again and so on: happy looping until {\TeX} is tired.
+This error message arises when there is a TFM file and a VF file that points to a raw TFM file that happens to be the original TFM file itself. From there, \TeX{} finds the corresponding VF file again and so on: happy looping until \TeX{} is tired.
 
 There probably was an error when creating the font files which resulted in not distinguishing raw TFM and TFM file. If you created the font files yourself, make sure that \emph{these are actually different files}.
 \end{minipage}};\\
@@ -401,12 +402,12 @@ kpathsea: Appending font creation commands to missfont.log.
 \end{minipage}};\\
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
-Probably the most common error message in {\LaTeX} fonts.
+Probably the most common error message in \LaTeX{} fonts.
 
 It's being triggered when the information in the (raw) TFM file is not sufficient to create the actual font, and thus again is a font installation error.
 \begin{itemize}
 \item Check that you did not interchange raw TFM and TFM font file (the raw TFM file should be a lot smaller).
-\item Check that {\TeX} finds your VF file if there is one.
+\item Check that \TeX{} finds your VF file if there is one.
 \end{itemize}
 
 Another possible cause is that the raw TFM is declared in no MAP file, or that \TeX's map cache isn't updated. Look for a map file with an entry starting with the raw TFM name, for example,
@@ -433,7 +434,7 @@ $> updmap --enable Map=/path/to/mapfile.map
 \end{minipage}};\\
 &
 \node [remedy] {\begin{minipage}[t]{\errormsgboxwidth}
-Probably easy: {\LaTeX} can't find the encoding file. Can you? In this case, you probably forgot to update \TeX's cache:
+Probably easy: \LaTeX{} can't find the encoding file. Can you? In this case, you probably forgot to update \TeX's cache:
 \begin{lstlisting}[language=bash]
 $> texhash
 \end{lstlisting}
